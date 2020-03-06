@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    h1 #{title}: #{movie.title}
+    p= movie.summary
+
+    if movie_instance.length
+
+        p #[strong Delete the following movieinstances before attempting to delete this movie.]
+
+        div(style='margin-left:20px;margin-top:20px')
+
+            h4 MoviesInstances
+
+            dl
+            each movieinstance in movie_instance
+                dt
+                    a(href=movieinstance.url) #{movieinstance.status}
+                dd #{movieinstance.due_back_formatted}
+
+    else
+        p Do you really want to delete this Movie?
+
+        form(method='POST' action='')
+            div.form-group
+                input#movieid.form-control(type='hidden',name='movieid', required='true', value=movie._id )
+
+            button.btn.btn-primary(type='submit') Delete

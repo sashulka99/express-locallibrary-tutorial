@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+    h1 Producer: #{producer.name}
+    p #{producer.date_formatted} - #{producer.date_death_formatted}
+
+    div(style='margin-left:20px;margin-top:20px')
+
+        h4 Movies
+
+        dl
+            each movie in producer_movies
+                dt
+                    a(href=movie.url) #{movie.title}
+                dd #{movie.summary}
+
+            else
+                p This producer has no movies.
+
+        hr
+        p
+            a(href=producer.url + '/delete') Delete producer
+        p
+            a(href=producer.url + '/update') Update producer

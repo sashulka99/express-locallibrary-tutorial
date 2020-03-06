@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    h1 #{title}: #{producer.name}
+    p= producer.lifespan
+
+    if producer_movies.length
+
+        p #[strong Delete the following movies before attempting to delete this producer.]
+
+        div(style='margin-left:20px;margin-top:20px')
+
+            h4 Movies
+
+            dl
+            each movie in producer_movies
+                dt
+                    a(href=movie.url) #{movie.title}
+                dd #{movie.summary}
+
+    else
+        p Do you really want to delete this Producer?
+
+        form(method='POST' action='')
+            div.form-group
+                input#producerid.form-control(type='hidden',name='producerid', required='true', value=producer._id )
+
+            button.btn.btn-primary(type='submit') Delete

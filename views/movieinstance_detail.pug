@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+    h1 ID: #{movieinstance._id}
+
+    p #[strong Title:]
+        a(href=movieinstance.movie.url) #{movieinstance.movie.title}
+    p #[strong Imprint:] #{movieinstance.imprint}
+
+    p #[strong Status:]
+        if movieinstance.status=='Available'
+            span.text-success #{movieinstance.status}
+        else if movieinstance.status=='Maintenance'
+            span.text-danger #{movieinstance.status}
+        else
+            span.text-warning #{movieinstance.status}
+
+    if movieinstance.status!='Available'
+        p #[strong Due back:] #{movieinstance.due_back_formatted}
+    a(href=movieinstance.url + '/delete') Delete MovieInstance
+    p
+    a(href=movieinstance.url + '/update') Update MovieInstance
